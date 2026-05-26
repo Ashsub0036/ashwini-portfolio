@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-accent: var(--accent);
+  --color-accent-glow: var(--accent-glow);
+  --color-gold: var(--gold);
+  
+  --font-sans: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: "Bebas Neue", sans-serif;
+  --font-serif: "DM Serif Display", serif;
+}
+
+/* ── THEME TOKENS ── */
+:root {
+  --accent: #00c47a;
+  --accent-glow: rgba(0, 196, 122, 0.18);
+  --gold: #b8924a;
+  --radius: 4px;
+}
+
+[data-theme="light"] {
+  --bg: #f8f6f2;
+  --bg2: #f0ede7;
+  --surface: #ffffff;
+  --surface2: #f5f3ef;
+  --surface3: #ece9e3;
+  --text: #111110;
+  --muted: #888880;
+  --subtle: #bbb9b3;
+  --border: rgba(0, 0, 0, 0.09);
+  --border-md: rgba(0, 0, 0, 0.15);
+  --nav-bg: rgba(248, 246, 242, 0.88);
+  --glow-color: rgba(0, 196, 122, 0.1);
+}
+
+[data-theme="dark"] {
+  --bg: #080808;
+  --bg2: #0e0e0e;
+  --surface: #111111;
+  --surface2: #181818;
+  --surface3: #1e1e1e;
+  --text: #f0ede8;
+  --muted: #777770;
+  --subtle: #444440;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-md: rgba(255, 255, 255, 0.14);
+  --nav-bg: rgba(8, 8, 8, 0.88);
+  --glow-color: rgba(0, 196, 122, 0.2);
+}
+
+/* ── BASE STYLES ── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background 0.35s, color 0.35s;
+}
+
+/* Custom Selection style */
+::selection {
+  background-color: var(--accent-glow);
+  color: var(--text);
+}
+
+/* ── SYSTEM GLOWS & CUSTOM NOISE ── */
+.hero-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+  filter: contrast(200%);
+}
+
+.cctv-scan {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(transparent, transparent 3px, rgba(0, 196, 122, 0.04) 3px, rgba(0, 196, 122, 0.04) 4px);
+}
+
+/* ── KEYFRAME ANIMATIONS ── */
+@keyframes border-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-slow-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes scan-beam {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+/* Utilities for visual nodes */
+.bg-bridal {
+  background: radial-gradient(ellipse at 35% 45%, #3a1e40 0%, #1a0d1e 50%, #080808 100%);
+}
+.bg-bridal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='.8' fill='rgba(201,168,76,0.18)'/%3E%3C/svg%3E") repeat;
+}
+
+.bg-cctv {
+  background: radial-gradient(ellipse at 70% 30%, #0c2516 0%, #060e08 60%, #080808 100%);
+}
+
+.bg-ewaste {
+  background: radial-gradient(ellipse at 40% 60%, #091628 0%, #050c1a 60%, #080808 100%);
+}
+
+.bg-interior {
+  background: radial-gradient(ellipse at 55% 35%, #1a1108 0%, #0f0a04 60%, #080808 100%);
+}
+
+.ewaste-grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(0,160,255,0.07) 1px,transparent 1px), linear-gradient(90deg,rgba(0,160,255,0.07) 1px,transparent 1px);
+  background-size: 28px 28px;
+}
+
+.interior-lines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(184,146,74,0.05) 40px, rgba(184,146,74,0.05) 41px);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--border-md);
+  border-radius: 9999px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
